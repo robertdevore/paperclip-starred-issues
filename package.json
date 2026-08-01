@@ -44,19 +44,13 @@
   ],
   "author": "Robert DeVore",
   "license": "MIT",
-  "pnpm": {
-    "overrides": {
-      "@paperclipai/shared": "file:.paperclip-sdk/paperclipai-shared-0.3.1.tgz"
-    }
-  },
   "devDependencies": {
-    "@paperclipai/shared": "file:.paperclip-sdk/paperclipai-shared-0.3.1.tgz",
-    "@paperclipai/plugin-sdk": "file:.paperclip-sdk/paperclipai-plugin-sdk-1.0.0.tgz",
+    "@paperclipai/plugin-sdk": "^2026.722.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^24.6.0",
     "@types/react": "^19.0.8",
-    "esbuild": "^0.27.3",
+    "esbuild": "^0.28.1",
     "rollup": "^4.38.0",
     "tslib": "^2.8.1",
     "typescript": "^5.7.3",

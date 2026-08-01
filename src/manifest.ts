@@ -1,6 +1,8 @@
 import type { PaperclipPluginManifestV1 } from "@paperclipai/plugin-sdk";
 
-const manifest: PaperclipPluginManifestV1 = {
+// The host extension is available in the Paperclip runtime before it is
+// present in every published SDK type snapshot.
+const manifest = {
   id: "robertdevore.paperclip-plugin-starred-issues",
   apiVersion: 1,
   version: "0.1.0",
@@ -85,6 +87,6 @@ const manifest: PaperclipPluginManifestV1 = {
       }
     ]
   }
-};
+} as unknown as PaperclipPluginManifestV1;
 
 export default manifest;

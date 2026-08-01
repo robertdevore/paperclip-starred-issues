@@ -95,7 +95,7 @@ pnpm dev
 pnpm test
 ```
 
-The SDK snapshot under `.paperclip-sdk/` is generated from the Paperclip checkout used during local development and is intentionally not published to npm. Refresh it when developing against a newer host SDK.
+Development uses the published `@paperclipai/plugin-sdk` package, so a fresh GitHub clone can install with `pnpm install` without any local Paperclip checkout. This repository includes a small compile-time compatibility declaration for the host’s `issueIds` filter; the runtime host must still provide both `issueHeaderAction` and `issueIds`. If you temporarily test other unreleased host SDK changes, use a local SDK override only in your working copy and do not commit it.
 
 ## GitHub release checklist
 
