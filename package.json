@@ -2,7 +2,6 @@
   "name": "@robertdevore/paperclip-plugin-starred-issues",
   "version": "0.1.0",
   "type": "module",
-  "private": true,
   "description": "Personal starred issues with a reusable Paperclip issue list.",
   "scripts": {
     "build": "node ./esbuild.config.mjs",
@@ -10,7 +9,28 @@
     "dev": "node ./esbuild.config.mjs --watch",
     "dev:ui": "paperclip-plugin-dev-server --root . --ui-dir dist/ui --port 4177",
     "test": "vitest run --config ./vitest.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "files": [
+    "dist",
+    "migrations",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertdevore/paperclip-starred-issues.git"
+  },
+  "homepage": "https://github.com/robertdevore/paperclip-starred-issues#readme",
+  "bugs": {
+    "url": "https://github.com/robertdevore/paperclip-starred-issues/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "paperclipPlugin": {
     "manifest": "./dist/manifest.js",

@@ -11,10 +11,29 @@ pnpm install
 pnpm typecheck
 pnpm test
 pnpm build
-paperclipai plugin install /Users/robertdevore/2026/paperclip-plugin-starred-issues
+paperclipai plugin install /Users/robertdevore/2026/paperclip-starred-issues
 ```
 
-For publishing, build and publish this package to npm, then install the package name from Paperclip’s plugin manager.
+For an npm installation after publishing:
+
+```bash
+paperclipai plugin install @robertdevore/paperclip-plugin-starred-issues
+```
+
+The host must include the generic `issueHeaderAction` and `issueIds` extension points used by this plugin. Use a Paperclip release that includes those extensions.
+
+## npm release
+
+The package is configured for public scoped npm publishing. From a clean checkout:
+
+```bash
+pnpm install
+npm version patch
+git push origin main --follow-tags
+npm publish --access public
+```
+
+Use `npm version minor` or `npm version major` when appropriate. The `prepublishOnly` hook runs typecheck, tests, and a production build before publishing.
 
 ## What it registers
 
@@ -41,4 +60,12 @@ pnpm dev
 pnpm test
 ```
 
-The SDK snapshot under `.paperclip-sdk/` is generated from the Paperclip checkout used during local development. Refresh it when developing against a newer host SDK.
+The SDK snapshot under `.paperclip-sdk/` is generated from the Paperclip checkout used during local development and is intentionally not published to npm. Refresh it when developing against a newer host SDK.
+
+## GitHub release checklist
+
+1. Update the version with `npm version patch`, `minor`, or `major`.
+2. Run `pnpm typecheck`, `pnpm test`, and `pnpm build`.
+3. Push the commit and tag with `git push origin main --follow-tags`.
+4. Publish with `npm publish --access public`.
+5. Install the published package into Paperclip and confirm the plugin reports `ready`.
