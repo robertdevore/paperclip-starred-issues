@@ -2,38 +2,73 @@
 
 This plugin adds a personal, per-user Starred page and a star toggle to every issue header. It uses Paperclip’s native issue list, so sorting, filters, pagination/loading, responsive rows, and issue navigation remain host-owned.
 
-## Install
+Package: `@robertdevore/paperclip-plugin-starred-issues`
 
-Build the plugin, then install the local folder into a Paperclip instance:
+Source: https://github.com/robertdevore/paperclip-starred-issues
+
+## Install from npm
+
+After the package is published, install it into a Paperclip instance with the Paperclip CLI or Plugin Manager:
 
 ```bash
+paperclipai plugin install @robertdevore/paperclip-plugin-starred-issues
+paperclipai plugin inspect robertdevore.paperclip-plugin-starred-issues
+```
+
+The plugin must report `status=ready`. The host must include the generic `issueHeaderAction` and `issueIds` extension points used by this plugin. Use a Paperclip release that includes those extensions.
+
+## Install from a local checkout
+
+For development or testing changes before publishing:
+
+```bash
+git clone https://github.com/robertdevore/paperclip-starred-issues.git
+cd paperclip-starred-issues
 pnpm install
 pnpm typecheck
 pnpm test
 pnpm build
-paperclipai plugin install /Users/robertdevore/2026/paperclip-starred-issues
+paperclipai plugin install "$PWD"
 ```
 
-For an npm installation after publishing:
+Paperclip watches the local plugin’s built `dist/` files. Run `pnpm dev` in the checkout while iterating on source changes.
+
+## Compatibility
+
+- Node.js 20 or newer is required for local development and package execution.
+- The plugin uses Paperclip’s board-authenticated plugin API routes.
+- Stars are personal to the authenticated Paperclip user in authenticated deployments.
+- In local trusted mode, Paperclip uses the stable `board` actor identity.
+
+## Publish to npm
+
+The package is configured as a public scoped package. npm requires an npm account and either account 2FA or a granular access token configured to bypass 2FA for direct publishing. Publish the first release from a clean checkout:
 
 ```bash
-paperclipai plugin install @robertdevore/paperclip-plugin-starred-issues
-```
-
-The host must include the generic `issueHeaderAction` and `issueIds` extension points used by this plugin. Use a Paperclip release that includes those extensions.
-
-## npm release
-
-The package is configured for public scoped npm publishing. From a clean checkout:
-
-```bash
+cd paperclip-starred-issues
 pnpm install
-npm version patch
-git push origin main --follow-tags
+npm login
+npm whoami
+npm pack --dry-run
 npm publish --access public
 ```
 
-Use `npm version minor` or `npm version major` when appropriate. The `prepublishOnly` hook runs typecheck, tests, and a production build before publishing.
+The `prepublishOnly` hook automatically runs typecheck, tests, and a production build. The npm tarball contains only `dist/`, `migrations/`, `README.md`, `LICENSE`, and `package.json`; development SDK snapshots, source, tests, and lockfiles are excluded.
+
+After publishing, verify the package is public and installable:
+
+```bash
+npm view @robertdevore/paperclip-plugin-starred-issues version
+paperclipai plugin install @robertdevore/paperclip-plugin-starred-issues
+```
+
+For later releases, update the version, push the commit and tag, then publish:
+
+```bash
+npm version patch   # or minor / major
+git push origin main --follow-tags
+npm publish --access public
+```
 
 ## What it registers
 
@@ -64,8 +99,9 @@ The SDK snapshot under `.paperclip-sdk/` is generated from the Paperclip checkou
 
 ## GitHub release checklist
 
-1. Update the version with `npm version patch`, `minor`, or `major`.
-2. Run `pnpm typecheck`, `pnpm test`, and `pnpm build`.
-3. Push the commit and tag with `git push origin main --follow-tags`.
-4. Publish with `npm publish --access public`.
-5. Install the published package into Paperclip and confirm the plugin reports `ready`.
+1. Make the GitHub repository public if you want others to browse or clone the source.
+2. Update the version with `npm version patch`, `minor`, or `major`.
+3. Run `pnpm typecheck`, `pnpm test`, `pnpm build`, and `npm pack --dry-run`.
+4. Push the commit and tag with `git push origin main --follow-tags`.
+5. Publish with `npm publish --access public`.
+6. Install the published package into Paperclip and confirm the plugin reports `ready`.
