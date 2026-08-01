@@ -16,10 +16,15 @@ type StarsResponse = { issueIds: string[] };
 type StarResponse = { starred: boolean };
 
 async function callStarApi<T>(path: string, init?: RequestInit): Promise<T> {
+  const method = init?.method?.toUpperCase() ?? "GET";
   const response = await fetch(`/api/plugins/${encodeURIComponent(PLUGIN_ID)}/api${path}`, {
     credentials: "same-origin",
     headers: { "content-type": "application/json", ...(init?.headers ?? {}) },
     ...init,
+    // The host validates non-GET plugin requests with Express's body-aware
+    // JSON check. Send an empty JSON object for bodyless mutations such as
+    // DELETE so the request is treated as application/json.
+    ...(method !== "GET" && init?.body === undefined ? { body: "{}" } : {}),
   });
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(typeof payload?.error === "string" ? payload.error : `Request failed (${response.status})`);
