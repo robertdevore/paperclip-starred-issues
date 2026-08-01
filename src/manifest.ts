@@ -5,9 +5,9 @@ import type { PaperclipPluginManifestV1 } from "@paperclipai/plugin-sdk";
 const manifest = {
   id: "robertdevore.paperclip-plugin-starred-issues",
   apiVersion: 1,
-  version: "0.1.0",
+  version: "0.1.1",
   displayName: "Starred Issues",
-  description: "Personal starred issues with a reusable Paperclip issue list.",
+  description: "Personal starred issues for Paperclip with a sidebar page and issue-header toggle.",
   author: "Robert DeVore",
   categories: ["ui"],
   capabilities: [

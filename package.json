@@ -1,8 +1,8 @@
 {
   "name": "@robertdevore/paperclip-plugin-starred-issues",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
-  "description": "Personal starred issues with a reusable Paperclip issue list.",
+  "description": "Personal starred issues for Paperclip with a sidebar page and issue-header toggle.",
   "scripts": {
     "build": "node ./esbuild.config.mjs",
     "build:rollup": "rollup -c",
