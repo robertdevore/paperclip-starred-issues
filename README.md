@@ -22,17 +22,16 @@ The inspection should report `status=ready`. Once installed, reload Paperclip if
 ## Requirements
 
 - Paperclip with external plugin support.
-- A Paperclip host that provides the `issueHeaderAction` and `issueIds` extension points.
 - Node.js 20 or newer on the Paperclip host.
 
-These are Paperclip host features, not methods that a plugin author adds locally:
+### Current Paperclip compatibility status
+
+This plugin is a reference implementation for two Paperclip extension points that are not currently available in the published Paperclip host/SDK. It is not expected to work on an unmodified Paperclip release until these features are accepted upstream:
 
 - `issueHeaderAction` is a core UI slot. Paperclip renders the slot in the issue header and passes the issue context to the plugin component.
 - `issueIds` is a core `IssuesList` filter. Paperclip carries the list of IDs through the SDK and issue-list API so the plugin can reuse the native list UI.
 
-The host support for both surfaces is tracked in Paperclip’s `feat: add generic issue header and id filters for plugins` change. The plugin’s compatibility shims (`src/manifest.ts` and `src/host-compat.d.ts`) are needed because the published SDK used by v0.1.1 predates those type declarations; they do not implement the host behavior.
-
-Use a Paperclip release that includes the host change and a matching published SDK. Paperclip `v2026.722.0` and SDK `2026.722.0` predate it, so those hosts may reject the manifest’s unknown slot type or otherwise cannot render the star action/filter the native issue list. Once the host change is released, the plugin works without any custom changes to an individual Paperclip installation. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
+These are host features, not methods that a plugin author can implement inside the plugin while still using the native Paperclip issue header and issue-list controls. The compatibility shims (`src/manifest.ts` and `src/host-compat.d.ts`) only let the plugin compile against the current published SDK; they do not add the missing host behavior. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
 
 ## How it works
 
