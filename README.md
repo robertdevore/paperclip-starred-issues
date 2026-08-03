@@ -32,7 +32,7 @@ These are Paperclip host features, not methods that a plugin author adds locally
 
 The host support for both surfaces is tracked in Paperclip’s `feat: add generic issue header and id filters for plugins` change. The plugin’s compatibility shims (`src/manifest.ts` and `src/host-compat.d.ts`) are needed because the published SDK used by v0.1.1 predates those type declarations; they do not implement the host behavior.
 
-Use a Paperclip release that includes the host change and a matching published SDK. Paperclip `v2026.722.0` and SDK `2026.722.0` predate it, so the published plugin installs but cannot render its star action or filter the native issue list on those versions. Once the host change is released, the plugin works without any custom changes to an individual Paperclip installation. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
+Use a Paperclip release that includes the host change and a matching published SDK. Paperclip `v2026.722.0` and SDK `2026.722.0` predate it, so those hosts may reject the manifest’s unknown slot type or otherwise cannot render the star action/filter the native issue list. Once the host change is released, the plugin works without any custom changes to an individual Paperclip installation. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
 
 ## How it works
 
