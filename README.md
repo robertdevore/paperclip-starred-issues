@@ -25,7 +25,14 @@ The inspection should report `status=ready`. Once installed, reload Paperclip if
 - A Paperclip host that provides the `issueHeaderAction` and `issueIds` extension points.
 - Node.js 20 or newer on the Paperclip host.
 
-Use a Paperclip release that includes those extension points. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
+These are Paperclip host features, not methods that a plugin author adds locally:
+
+- `issueHeaderAction` is a core UI slot. Paperclip renders the slot in the issue header and passes the issue context to the plugin component.
+- `issueIds` is a core `IssuesList` filter. Paperclip carries the list of IDs through the SDK and issue-list API so the plugin can reuse the native list UI.
+
+The host support for both surfaces is tracked in Paperclip’s `feat: add generic issue header and id filters for plugins` change. The plugin’s compatibility shims (`src/manifest.ts` and `src/host-compat.d.ts`) are needed because the published SDK used by v0.1.1 predates those type declarations; they do not implement the host behavior.
+
+Use a Paperclip release that includes the host change and a matching published SDK. Paperclip `v2026.722.0` and SDK `2026.722.0` predate it, so the published plugin installs but cannot render its star action or filter the native issue list on those versions. Once the host change is released, the plugin works without any custom changes to an individual Paperclip installation. The plugin uses Paperclip’s board-authenticated plugin API routes; in authenticated deployments, stars are personal to the signed-in user.
 
 ## How it works
 
