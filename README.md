@@ -6,7 +6,7 @@ This is a published, ready-to-install Paperclip plugin.
 
 - npm: [`@robertdevore/paperclip-plugin-starred-issues`](https://www.npmjs.com/package/@robertdevore/paperclip-plugin-starred-issues)
 - Source and releases: [github.com/robertdevore/paperclip-starred-issues](https://github.com/robertdevore/paperclip-starred-issues)
-- Current release: [`v0.1.1`](https://github.com/robertdevore/paperclip-starred-issues/releases/tag/v0.1.1)
+- Current release: [`v0.1.2`](https://github.com/robertdevore/paperclip-starred-issues/releases/tag/v0.1.2)
 
 ## Install the published plugin
 

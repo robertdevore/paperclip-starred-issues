@@ -1,6 +1,6 @@
 {
   "name": "@robertdevore/paperclip-plugin-starred-issues",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Personal starred issues for Paperclip with a sidebar page and issue-header toggle.",
   "scripts": {
@@ -45,7 +45,7 @@
   "author": "Robert DeVore",
   "license": "MIT",
   "devDependencies": {
-    "@paperclipai/plugin-sdk": "^2026.722.0",
+    "@paperclipai/plugin-sdk": "^2026.1012.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^24.6.0",
